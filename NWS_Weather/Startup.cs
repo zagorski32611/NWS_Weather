@@ -12,6 +12,9 @@ using NWS_Weather.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NWS_Weather.Interfaces;
+using NWS_Weather.Services;
+using NWS_Weather.Controllers;
 
 namespace NWS_Weather
 {
@@ -28,11 +31,14 @@ namespace NWS_Weather
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<NWS_WeatherContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=aspnet-NWS_Weather-34EB9AC1-4878-43CA-97EB-0EF902498F68;Trusted_Connection=True;MultipleActiveResultSets=true"
+            , x => x.UseNetTopologySuite()));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<NWS_WeatherContext>();
             services.AddControllersWithViews();
+
+            services.AddScoped<IForecastService, ForecastService>();
             services.AddRazorPages();
         }
 

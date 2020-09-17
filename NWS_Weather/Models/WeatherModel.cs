@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using Newtonsoft.Json.Schema;
+
 
 namespace NWS_Weather.Models
 {
@@ -19,19 +24,15 @@ namespace NWS_Weather.Models
         public Geometry geometry { get; set; }
         public Properties properties { get; set; }
     }
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+
     public class Geometry
     {
         [Key]
         public int geometryId { get; set; }
         public string type { get; set; }
-        public List<Polygon> polygon{ get; set; }
     }
 
-    public class Polygon
-    {
-        public Tuple<double, double> coordinatePairs { get; set; }
-    }
+
 
     public class Properties
     {
