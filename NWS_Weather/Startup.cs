@@ -39,6 +39,7 @@ namespace NWS_Weather
             services.AddControllersWithViews();
 
             services.AddScoped<IForecastService, ForecastService>();
+            services.AddScoped<ILocationService, LocationService>();
             services.AddRazorPages();
         }
 

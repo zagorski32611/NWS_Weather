@@ -14,11 +14,14 @@ namespace NWS_Weather.Controllers
     public class WeatherController : Controller
     {
         private readonly NWS_WeatherContext _context;
+
+        private readonly ILocationService _locationService;
         private readonly IForecastService _forecastService;
 
-        public WeatherController(NWS_WeatherContext context, IForecastService forecastService)
+        public WeatherController(NWS_WeatherContext context, ILocationService locationService, IForecastService forecastService)
         {
             _context = context;
+            _locationService = locationService;
             _forecastService = forecastService;
 
         }
